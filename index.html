@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="Obscured by Clouds Random Web Search">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Obscured by Clouds Random Web Search</title>
+</head>
+  
+<body>
+<pre>
+
+When checking internet connections, I type random letters in the url box and so I often get obscure and interesting video results. 
+I feel like an archeologist or a pioneer when I find an old video that has less than 100 views. 
+
+This Javascript program will help you do just that.
+Note, longer strings are not better. Thus the reduce by 1 button.
+
+Suggestions: just letters, 3 - 5 characters long
+Be kind. Don't leave rude comments. These are real people with real feelings.
+
+Warning. be careful. some websites can launch attacks on your devices.
+</pre>
+  
+<form>  
+<input type='checkbox' id='letters' checked> a - z
+<br>
+<input type='checkbox' id='numbers' > 0 - 9
+<br>
+<input type='checkbox' id='dash' > -
+<br>
+<input type='checkbox' id='underscore' > _
+<br>
+<input type='checkbox' id='space' > space
+<br>
+<input type='checkbox' id='special' > special ~!@#$%^*()_+-=
+<br>
+
+<select id='howMany'>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option selected value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+</select> How many characters
+<br>
+<select id='search'>
+  <option value="https://www.google.com/search?q=">Google Search</option>
+  <option value="https://www.youtube.com/results?search_query=">YouTube Search</option>
+ <option value="https://www.bing.com/search?q=">Bing Search </option>
+</select> What kind of search
+ 
+ <br>
+<input type='textbox' size='50' id='urlTextBox'>
+  <br><br>
+<input type='button'  id='urlTextBox' value='get it' onclick='get_url();return 0;'>
+  <br><br>
+  if it don't work
+  <br><br>
+<input type='button'  id='_reduceByOne' value='reduce by 1' onclick='reduceByOne();'>
+  
+</form>
+  
+<script>
+
+var letters = 'abcdefghijklmnopqrstuvwxyz';
+var numbers = '0123456789';
+var dash = '-';
+var underscore = '_';
+var space = ' ';
+var special = '~!@#$%^*()_+-=';
+
+function get_url()
+{
+var charToUse = '';
+if ( document.getElementById("letters").checked ) { charToUse = charToUse + letters}
+if ( document.getElementById("numbers").checked ) {charToUse = charToUse + numbers}
+if ( document.getElementById("dash").checked ) {charToUse = charToUse + dash}
+if ( document.getElementById("underscore").checked ) {charToUse = charToUse + underscore}
+if ( document.getElementById("space").checked ) {charToUse = charToUse + space}
+if ( document.getElementById("special").checked ) {charToUse = charToUse + special}
+
+var numberOfCharacters = charToUse.length;
+var howMany =  document.getElementById("howMany").value;
+//var charToUseArray = charToUse.split('');
+var randomLetters = '';
+
+for (i = 0; i < howMany; i++)
+  {
+  var off = Math.floor(Math.random() * numberOfCharacters); 
+  var lett = charToUse.charAt( off );
+  randomLetters = randomLetters + lett ;
+  }
+ 
+var searchURL = document.getElementById("search").value;
+var fullURL = searchURL + randomLetters;
+document.getElementById("urlTextBox").value = fullURL;
+window.open( fullURL);
+}
+
+function reduceByOne()
+{
+var searchURL = document.getElementById("urlTextBox").value;
+var leng = searchURL.length;
+
+var fullURL = searchURL.substr(0,leng-1);  
+document.getElementById("urlTextBox").value = fullURL;
+window.open( fullURL);  
+}
+</script>
+  
+</body>
+</html>
