@@ -1,7 +1,7 @@
 # Obscured-by-Clouds-Random-Web-Search
 Obscured by Clouds Random Web Search
 
-	When checking internet connections, I type random letters in the url box and so I often get obscure and interesting video results. 
+When checking internet connections, I type random letters in the url box and so I often get obscure and interesting video results. 
 I feel like an archeologist or a pioneer when I find an old video that has less than 100 views. 
 
 This Javascript program will help you do just that.
