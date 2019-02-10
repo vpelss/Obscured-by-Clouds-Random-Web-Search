@@ -8,21 +8,19 @@
 </head>
   
 <body>
-<pre>
-
-When checking internet connections, I type random letters in the url box and so I often get obscure and interesting video results. 
-I feel like an archeologist or a pioneer when I find an old video that has less than 100 views. 
-
-This Javascript program will help you do just that.
-Note, longer strings are not better. Thus the reduce by 1 button.
-
-Suggestions: just letters, 3 - 5 characters long
-Be kind. Don't leave rude comments. These are real people with real feelings.
-
-Warning. be careful. some websites can launch attacks on your devices.
-</pre>
+<h4>
+Obscured by Clouds Random Web Search
+</h4>
   
+  <form>
+    <input type='button' value='What is this?' onclick='whatIsThis()'>
+    
+  </form>
+  
+  <p>
 <form>  
+  
+  
 <input type='checkbox' id='letters' checked> a - z
 <br>
 <input type='checkbox' id='numbers' > 0 - 9
@@ -33,7 +31,7 @@ Warning. be careful. some websites can launch attacks on your devices.
 <br>
 <input type='checkbox' id='space' > space
 <br>
-<input type='checkbox' id='special' > special ~!@#$%^*()_+-=
+<input type='checkbox' id='special' > special ~!@#$^*()_+-
 <br>
 
 <select id='howMany'>
@@ -67,6 +65,10 @@ Warning. be careful. some websites can launch attacks on your devices.
   
 </form>
   
+  
+<p>
+  <a href='https://github.com/vpelss/Obscured-by-Clouds-Random-Web-Search' target='_blank'>Code at Github</a>
+  
 <script>
 
 var letters = 'abcdefghijklmnopqrstuvwxyz';
@@ -74,7 +76,7 @@ var numbers = '0123456789';
 var dash = '-';
 var underscore = '_';
 var space = ' ';
-var special = '~!@#$%^*()_+-=';
+var special = '~!@#$^*()_+-';
 
 function get_url()
 {
@@ -112,6 +114,13 @@ var leng = searchURL.length;
 var fullURL = searchURL.substr(0,leng-1);  
 document.getElementById("urlTextBox").value = fullURL;
 window.open( fullURL);  
+}
+  
+function whatIsThis()
+{
+var text = 'When checking internet connections, I type random letters in the url box and so I often get obscure and interesting video results. \nI feel like an archeologist when I find an old video that has less than 100 views.\nThis Javascript program will help you do just that.\n\nNote, longer strings are not better. Thus the reduce by 1 button.\n\nSuggestions: just letters, 3 - 5 characters long.\nBe kind. Do not leave rude comments. These are real people with real feelings.\n\nWarning. be careful. some websites can launch attacks on your devices.\n\nI like to check all the boxes, choose 11 characters then reduce by 1 to see what comes up.';
+
+alert(text);
 }
 </script>
   
