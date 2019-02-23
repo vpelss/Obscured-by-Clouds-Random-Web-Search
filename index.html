@@ -57,14 +57,15 @@ Obscured by Clouds Random Web Search
  <br>
 <input type='textbox' size='50' id='urlTextBox'>
   <br><br>
-<input type='button'  id='urlTextBox' value='get it' onclick='get_url();return 0;'>
+<input type='button'  id='urlTextBox' value='Get random search' onclick='oneShotSearch();return 0;'>
   <br><br>
   if it don't work
   <br><br>
-<input type='button'  id='_reduceByOne' value='reduce by 1' onclick='reduceByOne();'>
+<input type='button'  id='_reduceByOne' value='Reduce current search string by 1' onclick='reduceByOne();'>
+  <br><br>
+<input type='button'  id='_autoCountDownToOne' value='Automaticaly reduce search string by 1' onclick='autoCountDownToOne();'> (opens multiple pages at once)
   
-</form>
-  
+  </form> 
   
 <p>
   <a href='https://github.com/vpelss/Obscured-by-Clouds-Random-Web-Search' target='_blank'>Code at Github</a>
@@ -77,8 +78,9 @@ var dash = '-';
 var underscore = '_';
 var space = ' ';
 var special = '~!@#$^*()_+-';
-
-function get_url()
+var globalRandomLetters = '';
+  
+function get_random_letters( howMany )
 {
 var charToUse = '';
 if ( document.getElementById("letters").checked ) { charToUse = charToUse + letters}
@@ -89,31 +91,65 @@ if ( document.getElementById("space").checked ) {charToUse = charToUse + space}
 if ( document.getElementById("special").checked ) {charToUse = charToUse + special}
 
 var numberOfCharacters = charToUse.length;
-var howMany =  document.getElementById("howMany").value;
-//var charToUseArray = charToUse.split('');
 var randomLetters = '';
-
 for (i = 0; i < howMany; i++)
   {
   var off = Math.floor(Math.random() * numberOfCharacters); 
   var lett = charToUse.charAt( off );
   randomLetters = randomLetters + lett ;
-  }
+  } 
+return randomLetters;
+}
  
+
+function buildURL(randomLetters)
+{  
 var searchURL = document.getElementById("search").value;
 var fullURL = searchURL + randomLetters;
 document.getElementById("urlTextBox").value = fullURL;
-window.open( fullURL);
+return fullURL;  
 }
 
+function oneShotSearch()
+{
+var howMany =  document.getElementById("howMany").value;
+var randomLetters = get_random_letters( howMany );
+globalRandomLetters = randomLetters;
+var fullURL = buildURL(randomLetters); 
+window.open( fullURL);
+}
+  
 function reduceByOne()
 {
-var searchURL = document.getElementById("urlTextBox").value;
-var leng = searchURL.length;
-
-var fullURL = searchURL.substr(0,leng-1);  
+var randomLetters = globalRandomLetters;
+var leng = globalRandomLetters.length;
+globalRandomLetters = globalRandomLetters.substr(0,leng-1);
+if ( globalRandomLetters == '' ) {return false;} //no letters left
+var fullURL = buildURL(globalRandomLetters);
 document.getElementById("urlTextBox").value = fullURL;
 window.open( fullURL);  
+}
+  
+function autoCountDownToOne()
+{
+if (globalRandomLetters == '') 
+  {//start the ball rolling
+  oneShotSearch();
+  }
+var randomLetters = globalRandomLetters;
+var leng = globalRandomLetters.length;
+var safetyCount = 15;
+do 
+     {
+     globalRandomLetters = globalRandomLetters.substr(0,leng-1);
+     leng = globalRandomLetters.length;
+     var fullURL = buildURL(globalRandomLetters);
+     document.getElementById("urlTextBox").value = fullURL;
+     window.open( fullURL);
+     safetyCount--;
+     if (safetyCount <= 0) {break;}
+     }
+while ( leng > 1 )
 }
   
 function whatIsThis()
